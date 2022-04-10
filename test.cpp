@@ -4,6 +4,7 @@
 #include <inttypes.h>
 #include <iostream>
 #include <chrono>
+#include <iomanip>
 #if defined(__GNUC__)
 #  include <cpuid.h>
 #  include <string>
@@ -65,6 +66,9 @@ void test64()
     T max = ut_numeric_limits<T>::max();
     T x;
     T end = max - 300000;
+    
+    double mpbest = 1000000000;
+    double hcbest = 1000000000;
 
     std::cout << "\n***Math-Prime-Util***\n";
     for (int i=0; i<4; ++i) {
@@ -80,7 +84,10 @@ void test64()
         if (x >= end)
           std::cout << "impossible64\n";
         auto t1 = steady_clock::now();
-        std::cout << dsec(t1-t0).count() << "\n";
+        auto elapsed = dsec(t1-t0).count();
+        if (elapsed < mpbest)
+            mpbest = elapsed;
+        std::cout << elapsed << "\n";
     }
 
     std::cout << "\n***Factor-Hurchalla***\n";
@@ -95,8 +102,14 @@ void test64()
         if (x >= end)
           std::cout << "impossible64\n";
         auto t1 = steady_clock::now();
-        std::cout << dsec(t1-t0).count() << "\n";
+        auto elapsed = dsec(t1-t0).count();
+        if (elapsed < hcbest)
+            hcbest = elapsed;
+        std::cout << elapsed << "\n";
     }
+
+    std::cout << std::fixed << setprecision(4);
+    std::cout << mpbest/hcbest << "x speedup\n";
 }
 
 

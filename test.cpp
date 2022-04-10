@@ -70,7 +70,7 @@ void test64()
     double mpbest = 1000000000;
     double hcbest = 1000000000;
 
-    std::cout << "\n***Math-Prime-Util***" << std::endl;
+    std::cout << " \n***Math-Prime-Util***" << std::endl;
     for (int i=0; i<4; ++i) {
         auto t0 = steady_clock::now();
         for (x = max; x >= end; x = x-2) {
@@ -90,7 +90,7 @@ void test64()
         std::cout << elapsed << std::endl;
     }
 
-    std::cout << "\n***Factor-Hurchalla***" << std::endl;
+    std::cout << " \n***Factor-Hurchalla***" << std::endl;
     for (int i=0; i<4; ++i) {
         auto t0 = steady_clock::now();
         for (x = max; x >= end; x = x-2) {
@@ -109,7 +109,7 @@ void test64()
     }
 
     std::cout << std::fixed << std::setprecision(2);
-    std::cout << "\n" << mpbest/hcbest << "x speedup" << std::endl;
+    std::cout << " \n" << mpbest/hcbest << "x speedup" << std::endl;
 }
 
 

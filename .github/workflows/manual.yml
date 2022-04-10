@@ -1,0 +1,28 @@
+# This is a basic workflow that is manually triggered
+
+name: Comparative benchmark
+
+on:
+  workflow_dispatch
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  #potential flags for -DCMAKE_CXX_FLAGS  are  -DHURCHALLA_AVOID_CSELECT=1 -DHURCHALLA_ALLOW_INLINE_ASM_ALL=1
+  #"-std=c++17"
+  #"-DHURCHALLA_POLLARD_RHO_TRIAL_FUNCTOR_NAME=PollardRhoBrentTrialParallel"
+  #-DHURCHALLA_ALLOW_INLINE_ASM_REDC 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configure CMake
+      #-DCMAKE_CXX_COMPILER=clang++-10
+      run: cmake -B ${{github.workspace}}/build  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}  -DCMAKE_C_FLAGS="-DSTANDALONE -DFACTOR_STANDALONE"
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+    - name: Benchmark Factoring
+      working-directory: ${{github.workspace}}/build
+      run: ./compare_factoring

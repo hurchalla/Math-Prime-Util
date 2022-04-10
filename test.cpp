@@ -108,7 +108,7 @@ void test64()
         std::cout << elapsed << "\n";
     }
 
-    std::cout << std::fixed << std::setprecision(3);
+    std::cout << std::fixed << std::setprecision(2);
     std::cout << "\n" << mpbest/hcbest << "x speedup\n";
 }
 

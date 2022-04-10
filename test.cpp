@@ -66,11 +66,11 @@ void test64()
     T max = ut_numeric_limits<T>::max();
     T x;
     T end = max - 300000;
-    
+
     double mpbest = 1000000000;
     double hcbest = 1000000000;
 
-    std::cout << "\n***Math-Prime-Util***\n";
+    std::cout << "\n***Math-Prime-Util***" << std::endl;
     for (int i=0; i<4; ++i) {
         auto t0 = steady_clock::now();
         for (x = max; x >= end; x = x-2) {
@@ -82,15 +82,15 @@ void test64()
               break;
         }
         if (x >= end)
-          std::cout << "impossible64\n";
+          std::cout << "impossible64" << std::endl;
         auto t1 = steady_clock::now();
         auto elapsed = dsec(t1-t0).count();
         if (elapsed < mpbest)
             mpbest = elapsed;
-        std::cout << elapsed << "\n";
+        std::cout << elapsed << std::endl;
     }
 
-    std::cout << "\n***Factor-Hurchalla***\n";
+    std::cout << "\n***Factor-Hurchalla***" << std::endl;
     for (int i=0; i<4; ++i) {
         auto t0 = steady_clock::now();
         for (x = max; x >= end; x = x-2) {
@@ -100,23 +100,23 @@ void test64()
               break;
         }
         if (x >= end)
-          std::cout << "impossible64\n";
+          std::cout << "impossible64" << std::endl;
         auto t1 = steady_clock::now();
         auto elapsed = dsec(t1-t0).count();
         if (elapsed < hcbest)
             hcbest = elapsed;
-        std::cout << elapsed << "\n";
+        std::cout << elapsed << std::endl;
     }
 
     std::cout << std::fixed << std::setprecision(2);
-    std::cout << "\n" << mpbest/hcbest << "x speedup\n";
+    std::cout << "\n" << mpbest/hcbest << "x speedup" << std::endl;
 }
 
 
 int main()
 {
 #if defined(__GNUC__)
-   std::cout << displayCPU() << "\n";
+   std::cout << displayCPU() << std::endl;
 #endif
     test64();
 }

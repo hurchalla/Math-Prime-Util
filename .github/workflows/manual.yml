@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Configure CMake
       #-DCMAKE_CXX_COMPILER=clang++-10
-      run: cmake -B ${{github.workspace}}/build  -DCMAKE_CXX_COMPILER=clang++  -DCMAKE_C_COMPILER=clang  -DCMAKE_CXX_FLAGS=-DHURCHALLA_POLLARD_RHO_TRIAL_FUNCTOR_NAME=PollardRhoBrentTrialParallel  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}  -DCMAKE_C_FLAGS="-DSTANDALONE -DFACTOR_STANDALONE"
+      run: cmake -B ${{github.workspace}}/build  -DCMAKE_CXX_COMPILER=clang++  -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}  -DCMAKE_C_FLAGS="-DSTANDALONE -DFACTOR_STANDALONE"
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
     - name: Benchmark Factoring

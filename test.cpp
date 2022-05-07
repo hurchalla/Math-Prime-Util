@@ -62,10 +62,10 @@ void test64()
     using namespace std::chrono;
     using dsec = duration<double>;
 
-    using T = int64_t;
+    using T = uint64_t;
     T max = ut_numeric_limits<T>::max();
     T x;
-    T end = max - 300000;
+    T end = max - 100000;
 
     double mpbest = 1000000000;
     double hcbest = 1000000000;
@@ -73,7 +73,7 @@ void test64()
     std::cout << " \n***Math-Prime-Util***" << std::endl;
     for (int i=0; i<4; ++i) {
         auto t0 = steady_clock::now();
-        for (x = max; x >= end; x = x-2) {
+        for (x = max; x >= end; x = x-1) {
             int num_factors;
             static_assert(sizeof(UV) == sizeof(std::uint64_t), "");
             UV factors[MPU_MAX_FACTORS+1];
@@ -93,7 +93,7 @@ void test64()
     std::cout << " \n***Factor-Hurchalla***" << std::endl;
     for (int i=0; i<4; ++i) {
         auto t0 = steady_clock::now();
-        for (x = max; x >= end; x = x-2) {
+        for (x = max; x >= end; x = x-1) {
             int num_factors;
             auto factors = factorize(x, num_factors);
             if (factors[0] == 0)

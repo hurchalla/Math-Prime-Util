@@ -62,7 +62,7 @@ void test64()
     using namespace std::chrono;
     using dsec = duration<double>;
 
-    using T = uint64_t;
+    using T = int64_t;
     T max = ut_numeric_limits<T>::max();
     T x;
     T end = max - 200000;
